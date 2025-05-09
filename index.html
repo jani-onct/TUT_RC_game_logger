@@ -234,6 +234,7 @@
     }
 
     function resetTimer() {
+      if (!confirm('本当にリセットしますか？')) return;
       clearInterval(timerInterval);
       elapsed = 0;
       updateTimerDisplay(0);
