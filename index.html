@@ -226,16 +226,8 @@
       document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
     }
 
-    function resetTimer() {
-      clearInterval(timerInterval);
-      elapsed = 0;
-      updateTimerDisplay(0);
-      document.getElementById("laps").innerHTML = "";
-      possessionCount = 1;
-      isNewPossession = true;
-      homeScore = 0;
-      awayScore = 0;
-      updateScores();
+    function resetTimer() {$1updateScores();
+      document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
     }
 
     function nextPossession() {
