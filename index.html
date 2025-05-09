@@ -74,7 +74,7 @@
     .score-box {
       width: 100%;
       padding: 10px;
-      border: 5px solid;
+      border: 3px solid;
       border-radius: 0;
       background: #000;
       color: #fff;
@@ -183,11 +183,13 @@
         <button onclick="recordLap('相手dunk')">相手dunk</button>
       </div>
     </div>
-    <button onclick="toggleLaps()" style="margin: 10px auto; padding: 10px 20px; font-size: 16px; display: block;">結果を表示</button>
+    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+  <button onclick="toggleLaps()" style="padding: 10px 20px; font-size: 16px;; white-space: nowrap; min-width: 130px;">結果を表示</button>
+  <button onclick="copyResults()" style="padding: 10px 20px; font-size: 16px;; white-space: nowrap; min-width: 130px;">結果をコピー</button>
+</div>
     <div id="laps" style="display: none;"></div>
   </div>
-
-  <button onclick="copyResults()" style="margin: 20px auto; padding: 10px 20px; font-size: 16px; display: block;">結果をコピー</button>
+  
 
   <script>
     let startTime, timerInterval;
@@ -298,23 +300,23 @@
     }
 
     function toggleLaps() {
-      const laps = document.getElementById('laps');
-      if (laps.style.display === 'none') {
-        laps.style.display = 'block';
-      } else {
-        laps.style.display = 'none';
-      }
-    }
-  </script>
+  const laps = document.getElementById('laps');
+  if (laps.style.display === 'none') {
+    laps.style.display = 'block';
+  } else {
+    laps.style.display = 'none';
+  }
+}
+</script>
 
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then(reg => console.log('SW registered:', reg))
-          .catch(err => console.error('SW registration failed:', err));
-      });
-    }
-  </script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => console.log('SW registered:', reg))
+        .catch(err => console.error('SW registration failed:', err));
+    });
+  }
+</script>
 </body>
 </html>
