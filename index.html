@@ -186,6 +186,8 @@
     <div id="laps"></div>
   </div>
 
+  <button onclick="copyResults()" style="margin: 20px auto; padding: 10px 20px; font-size: 16px; display: block;">結果をコピー</button>
+
   <script>
     let startTime, timerInterval;
     let elapsed = 0;
@@ -220,7 +222,6 @@
       timerInterval = setInterval(() => {
         elapsed = Date.now() - startTime;
         updateTimerDisplay(elapsed);
-
         if (elapsed >= 20000) {
           nextPossession();
         }
@@ -240,11 +241,11 @@
       updateTimerDisplay(0);
       document.getElementById("laps").innerHTML = "";
       possessionCount = 1;
+      isOffense = true;
       isNewPossession = true;
       homeScore = 0;
       awayScore = 0;
       updateScores();
-      document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
       document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
     }
 
@@ -261,7 +262,6 @@
     function recordLap(type) {
       const lapTime = document.getElementById("timer").textContent;
       const lapEntry = document.createElement("div");
-
       if (isNewPossession) {
         const header = document.createElement("div");
         const phase = isOffense ? '先攻' : '後攻';
@@ -271,17 +271,13 @@
         document.getElementById("laps").appendChild(header);
         isNewPossession = false;
       }
-
       lapEntry.textContent = `${type}: ${lapTime}`;
       document.getElementById("laps").appendChild(lapEntry);
-
-      const buttons = document.querySelectorAll('#lap-buttons button');
-      buttons.forEach(btn => {
+      document.querySelectorAll('#lap-buttons button').forEach(btn => {
         if (btn.textContent === type) {
           btn.classList.add('used');
         }
       });
-
       const points = getPointValue(type);
       if (type.startsWith("相手")) {
         awayScore += points;
@@ -289,6 +285,15 @@
         homeScore += points;
       }
       updateScores();
+    }
+
+    function copyResults() {
+      const text = document.getElementById('laps').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('結果をコピーしました');
+      }).catch(err => {
+        alert('コピーに失敗しました: ' + err);
+      });
     }
   </script>
 
