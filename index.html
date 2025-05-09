@@ -11,6 +11,7 @@
   <meta name="theme-color" content="#000000">
   <style>
     body {
+      overflow-x: hidden;
       font-family: sans-serif;
       text-align: center;
       margin: 20px;
@@ -236,6 +237,8 @@
       homeScore = 0;
       awayScore = 0;
       updateScores();
+      document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
+      document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
     }
 
     function nextPossession() {
