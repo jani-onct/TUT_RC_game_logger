@@ -190,6 +190,7 @@
     let startTime, timerInterval;
     let elapsed = 0;
     let possessionCount = 1;
+    let isOffense = true;
     let isNewPossession = true;
     let homeScore = 0;
     let awayScore = 0;
@@ -250,7 +251,8 @@
       clearInterval(timerInterval);
       elapsed = 0;
       updateTimerDisplay(0);
-      possessionCount++;
+      if (!isOffense) possessionCount++;
+      isOffense = !isOffense;
       isNewPossession = true;
       document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
     }
@@ -261,7 +263,8 @@
 
       if (isNewPossession) {
         const header = document.createElement("div");
-        header.textContent = `--- Possession ${possessionCount} ---`;
+        const phase = isOffense ? '先攻' : '後攻';
+        header.textContent = `--- Possession ${possessionCount} ${phase} ---`;
         header.style.fontWeight = "bold";
         header.style.marginTop = "10px";
         document.getElementById("laps").appendChild(header);
