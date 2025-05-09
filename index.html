@@ -183,7 +183,8 @@
         <button onclick="recordLap('相手dunk')">相手dunk</button>
       </div>
     </div>
-    <div id="laps"></div>
+    <button onclick="toggleLaps()" style="margin: 10px auto; padding: 10px 20px; font-size: 16px; display: block;">結果を表示</button>
+    <div id="laps" style="display: none;"></div>
   </div>
 
   <button onclick="copyResults()" style="margin: 20px auto; padding: 10px 20px; font-size: 16px; display: block;">結果をコピー</button>
@@ -294,6 +295,15 @@
       }).catch(err => {
         alert('コピーに失敗しました: ' + err);
       });
+    }
+
+    function toggleLaps() {
+      const laps = document.getElementById('laps');
+      if (laps.style.display === 'none') {
+        laps.style.display = 'block';
+      } else {
+        laps.style.display = 'none';
+      }
     }
   </script>
 
