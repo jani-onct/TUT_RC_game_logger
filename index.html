@@ -139,7 +139,9 @@ $1
     <button onclick="nextPossession()">NEXT POSSESSION</button>
   </div>
 
-  <div id="lap-section">
+  <button onclick="showResults()">GAME SET</button>
+
+<div id="lap-section" style="display: none;">
     <div id="lap-buttons">
       <div class="button-group">
         <button onclick="recordLap('パス')">パス</button>
@@ -158,11 +160,12 @@ $1
         <button onclick="recordLap('相手dunk')">相手dunk</button>
       </div>
     </div>
-    <div id="laps"></div>
+    <div id="results" style="display: none; width: 90%; max-width: 400px; margin: 20px auto; font-size: 18px; text-align: left;"></div>
+$1</div>
   </div>
 
-  <script>
-    let startTime, timerInterval;
+  $1
+    let resultsVisible = false;
     let elapsed = 0;
     let possessionCount = 1;
     let isNewPossession = true;
@@ -249,9 +252,16 @@ $1
       }
       updateScores();
     }
-  </script>
+  
+    function showResults() {
+      document.getElementById("lap-section").style.display = "none";
+      document.getElementById("results").style.display = "block";
+      const laps = document.getElementById("laps").innerHTML;
+      document.getElementById("results").innerHTML = `<h3>結果</h3><div>${laps}</div>`;
+    }
 
-  <script>
+$1
+<script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./service-worker.js')
