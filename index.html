@@ -264,15 +264,37 @@
       document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
     }
 
+    // function nextPossession() {
+    //   clearInterval(timerInterval);
+    //   elapsed = 0;
+    //   updateTimerDisplay(0);
+    //   if (!isOffense) possessionCount++;
+    //   isOffense = !isOffense;
+    //   isNewPossession = true;
+    //   document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
+    // }
+
     function nextPossession() {
       clearInterval(timerInterval);
       elapsed = 0;
       updateTimerDisplay(0);
+
+      if (isNewPossession) {
+        const header = document.createElement("div");
+        const phase = isOffense ? '先攻' : '後攻';
+        header.textContent = `--- Possession ${possessionCount} ${phase} ---`;
+        header.style.fontWeight = "bold";
+        header.style.marginTop = "10px";
+        document.getElementById("laps").appendChild(header);
+      }
+
       if (!isOffense) possessionCount++;
       isOffense = !isOffense;
       isNewPossession = true;
+
       document.querySelectorAll('#lap-buttons button').forEach(btn => btn.classList.remove('used'));
     }
+
 
     function recordLap(type) {
       const lapTime = document.getElementById("timer").textContent;
